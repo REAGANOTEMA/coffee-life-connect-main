@@ -2,7 +2,7 @@ import heroCafeImg from '@/assets/manager-staff.jpeg';
 import foodSpreadImg from '@/assets/chefs1.jpeg';
 import galleryCafeImg from '@/assets/space2.jpg';
 import logoImg from '@/assets/logo.png';
-import footer from '@/components/footer';  // lowercase path, uppercase component
+import footer from '@/components/footer
 
 const galleryItems = [
   { img: heroCafeImg, caption: 'Welcome to Coffee Life House', desc: 'Located opposite the Police Barracks, Jinja, every aroma tells a story.' },

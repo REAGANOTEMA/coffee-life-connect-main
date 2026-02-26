@@ -3,12 +3,12 @@ import { ArrowRight, MapPin, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { branches, branchMenus } from '@/data/menuData';
-import footer from '@/components/footer';
+import footer from '@/components/footer
 import MenuItemCard from '@/components/MenuItemCard';
 
 import hero1 from '@/assets/hero-cafe.jpg';
 import hero2 from '@/assets/hero2.jpg';
-import hero3 from '@/assets/mocha.jpg';
+import hero3 from '@/assets/food-spread.jpg';
 import hero4 from '@/assets/juie.jpg';
 import hero5 from '@/assets/lounge-view.jpeg';
 import foodSpreadImg from '@/assets/food-spread.jpg';
