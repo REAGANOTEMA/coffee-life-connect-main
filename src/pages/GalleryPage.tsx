@@ -1,6 +1,6 @@
-import heroCafeImg from '@/assets/hero-cafe.jpg';
-import foodSpreadImg from '@/assets/food-spread.jpg';
-import galleryCafeImg from '@/assets/gallery-cafe.jpg';
+import heroCafeImg from '@/assets/manager-staff.jpeg';
+import foodSpreadImg from '@/assets/chefs1.jpeg';
+import galleryCafeImg from '@/assets/space2.jpg';
 
 const galleryItems = [
   { img: heroCafeImg, caption: 'Welcome to Coffee Life House', desc: 'Located opposite the Police Barracks, Jinja, every aroma tells a story.' },
