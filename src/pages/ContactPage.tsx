@@ -1,6 +1,7 @@
 import { MapPin, Phone, Clock, MessageCircle, Mail, ArrowRight } from 'lucide-react';
 import { branches } from '@/data/menuData';
 import { useState } from 'react';
+import Footer from '@/components/Footer'; // <-- import your shared Footer
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', branch: 'jinja-highway' });
@@ -12,7 +13,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       {/* Header */}
       <div className="py-16 px-4 md:px-8 text-center" style={{ background: 'hsl(var(--coffee-espresso))' }}>
         <span className="text-sm font-semibold tracking-widest uppercase mb-2 block" style={{ color: 'hsl(var(--gold))' }}>
@@ -26,20 +27,14 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 py-16">
+      <main className="flex-1 container mx-auto px-4 md:px-8 py-16">
         {/* Contact form & info */}
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           <div>
             <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Send Us a Message</h2>
             <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-semibold mb-1.5">Your Name</label>
-                <input type="text" placeholder="Full name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="input-field" />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-1.5">Email</label>
-                <input type="email" placeholder="your@email.com" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="input-field" />
-              </div>
+              <inputField label="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+              <inputField label="Email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} type="email"/>
               <div>
                 <label className="block text-sm font-semibold mb-1.5">Branch</label>
                 <select value={formData.branch} onChange={e => setFormData({...formData, branch: e.target.value})} className="input-field">
@@ -59,8 +54,7 @@ export default function ContactPage() {
           <div>
             <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Direct Contact</h2>
             <div className="space-y-4">
-              {[
-                { icon: <Phone size={18} />, label: 'Phone', value: '0746 888 730 / 0784 305 795' },
+              {[{ icon: <Phone size={18} />, label: 'Phone', value: '0746 888 730 / 0784 305 795' },
                 { icon: <MessageCircle size={18} />, label: 'WhatsApp', value: '+256 746 888 730' },
                 { icon: <Mail size={18} />, label: 'Email', value: 'info@coffeelifecafe.ug' },
               ].map(item => (
@@ -75,7 +69,6 @@ export default function ContactPage() {
                 </div>
               ))}
             </div>
-
             <div className="mt-6 p-4 rounded-xl border border-border bg-muted/30">
               <h3 className="font-bold mb-2">Our Promise to You</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -91,7 +84,6 @@ export default function ContactPage() {
         <div className="grid md:grid-cols-3 gap-6">
           {branches.map((b, i) => (
             <div key={b.id} className="card-menu overflow-hidden">
-              {/* Map embed placeholder */}
               <div className="h-40 relative overflow-hidden" style={{ background: 'hsl(var(--muted))' }}>
                 <iframe
                   title={b.name}
@@ -127,14 +119,20 @@ export default function ContactPage() {
             </div>
           ))}
         </div>
-      </div>
+      </main>
 
-      {/* Footer */}
-      <footer className="py-10 px-4 md:px-8 border-t border-border text-center" style={{ background: 'hsl(var(--coffee-espresso))' }}>
-        <p className="text-sm" style={{ color: 'hsl(var(--cream) / 0.6)' }}>
-          © {new Date().getFullYear()} Coffee Life Café | Designed by Reagan Otema
-        </p>
-      </footer>
+      {/* Shared Footer */}
+      <Footer />
+    </div>
+  );
+}
+
+// Optional helper component for input fields
+function inputField({ label, value, onChange, type = 'text' }: any) {
+  return (
+    <div>
+      <label className="block text-sm font-semibold mb-1.5">{label}</label>
+      <input type={type} placeholder={label} value={value} onChange={onChange} className="input-field" />
     </div>
   );
 }

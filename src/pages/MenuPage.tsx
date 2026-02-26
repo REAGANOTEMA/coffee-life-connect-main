@@ -1,8 +1,10 @@
 import { useState, useMemo } from 'react';
-import { Search, Filter } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import { branches, branchMenus, allCategories, categoryIcons, MenuCategory } from '@/data/menuData';
 import MenuItemCard from '@/components/MenuItemCard';
+import Footer from '@/components/Footer'; // ✅ Professional Footer
+import logoImg from '@/assets/logo.png'; // ✅ Page logo
 
 export default function MenuPage() {
   const { selectedBranch, setSelectedBranch, speak } = useApp();
@@ -21,7 +23,10 @@ export default function MenuPage() {
   const filtered = useMemo(() => {
     return allItems.filter(item => {
       const matchCat = activeCategory === 'All' || item.category === activeCategory;
-      const matchSearch = !search || item.name.toLowerCase().includes(search.toLowerCase()) || item.description.toLowerCase().includes(search.toLowerCase());
+      const matchSearch =
+        !search ||
+        item.name.toLowerCase().includes(search.toLowerCase()) ||
+        item.description.toLowerCase().includes(search.toLowerCase());
       return matchCat && matchSearch;
     });
   }, [allItems, activeCategory, search]);
@@ -32,8 +37,14 @@ export default function MenuPage() {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
+    <div className="min-h-screen flex flex-col">
+
+      {/* ================= PAGE LOGO ================= */}
+      <div className="py-6 px-4 md:px-8 text-center">
+        <img src={logoImg} alt="Coffee Life Logo" className="mx-auto w-44 h-auto" />
+      </div>
+
+      {/* ================= HEADER ================= */}
       <div className="py-12 px-4 md:px-8 text-center" style={{ background: 'hsl(var(--coffee-espresso))' }}>
         <span className="text-sm font-semibold tracking-widest uppercase mb-2 block" style={{ color: 'hsl(var(--gold))' }}>
           Browse & Order
@@ -48,16 +59,23 @@ export default function MenuPage() {
         {/* Branch selector */}
         <div className="flex justify-center flex-wrap gap-3">
           {branches.map(b => (
-            <button key={b.id} onClick={() => { setSelectedBranch(b.id); speak(`Branch switched to ${b.shortName}.`); }}
+            <button
+              key={b.id}
+              onClick={() => { setSelectedBranch(b.id); speak(`Branch switched to ${b.shortName}.`); }}
               className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${selectedBranch === b.id ? 'scale-105' : 'opacity-60 hover:opacity-80'}`}
-              style={selectedBranch === b.id ? { background: 'hsl(var(--gold))', color: 'hsl(var(--coffee-espresso))' } : { background: 'hsl(var(--cream) / 0.1)', color: 'hsl(var(--cream))', border: '1px solid hsl(var(--cream) / 0.3)' }}>
+              style={
+                selectedBranch === b.id
+                  ? { background: 'hsl(var(--gold))', color: 'hsl(var(--coffee-espresso))' }
+                  : { background: 'hsl(var(--cream) / 0.1)', color: 'hsl(var(--cream))', border: '1px solid hsl(var(--cream) / 0.3)' }
+              }
+            >
               {b.shortName}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Search */}
+      {/* ================= SEARCH ================= */}
       <div className="sticky top-16 z-30 bg-background/95 backdrop-blur-sm border-b border-border px-4 py-3">
         <div className="container mx-auto">
           <div className="relative max-w-md">
@@ -73,7 +91,9 @@ export default function MenuPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 py-8">
+      {/* ================= MENU GRID ================= */}
+      <div className="container mx-auto px-4 md:px-8 py-8 flex-1">
+
         {/* Category chips */}
         <div className="flex gap-2 flex-wrap mb-8">
           <button
@@ -83,8 +103,7 @@ export default function MenuPage() {
             🍽️ All Items ({allItems.length})
           </button>
           {availableCategories.map(cat => (
-            <button key={cat} onClick={() => handleCategoryChange(cat)}
-              className={`category-chip ${activeCategory === cat ? 'active' : ''}`}>
+            <button key={cat} onClick={() => handleCategoryChange(cat)} className={`category-chip ${activeCategory === cat ? 'active' : ''}`}>
               {categoryIcons[cat]} {cat}
             </button>
           ))}
@@ -115,7 +134,7 @@ export default function MenuPage() {
         )}
       </div>
 
-      {/* How to order guide */}
+      {/* ================= HOW TO ORDER ================= */}
       <section className="py-16 px-4 md:px-8 bg-muted/40 border-t border-border">
         <div className="container mx-auto">
           <h2 className="section-title mb-2">How to Order</h2>
@@ -139,6 +158,9 @@ export default function MenuPage() {
           </div>
         </div>
       </section>
+
+      {/* ================= PROFESSIONAL FOOTER ================= */}
+      <Footer />
     </div>
   );
 }

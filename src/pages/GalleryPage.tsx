@@ -1,6 +1,9 @@
+import Image from 'next/image';
 import heroCafeImg from '@/assets/manager-staff.jpeg';
 import foodSpreadImg from '@/assets/chefs1.jpeg';
 import galleryCafeImg from '@/assets/space2.jpg';
+import Footer from '@/components/Footer'; // ✅ Shared professional Footer
+import logoImg from '@/assets/logo.png';   // ✅ Page logo
 
 const galleryItems = [
   { img: heroCafeImg, caption: 'Welcome to Coffee Life House', desc: 'Located opposite the Police Barracks, Jinja, every aroma tells a story.' },
@@ -16,9 +19,20 @@ const galleryItems = [
 
 export default function GalleryPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
+      {/* Page Logo */}
+      <div className="py-6 px-4 md:px-8 text-center">
+        <Image
+          src={logoImg}
+          alt="Coffee Life Logo"
+          width={180}
+          height={60}
+          className="mx-auto"
+        />
+      </div>
+
       {/* Header */}
-      <div className="py-16 px-4 md:px-8 text-center" style={{ background: 'hsl(var(--coffee-espresso))' }}>
+      <div className="py-10 px-4 md:px-8 text-center" style={{ background: 'hsl(var(--coffee-espresso))' }}>
         <span className="text-sm font-semibold tracking-widest uppercase mb-2 block" style={{ color: 'hsl(var(--gold))' }}>
           Our Story
         </span>
@@ -30,7 +44,8 @@ export default function GalleryPage() {
         </p>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 py-16">
+      {/* Gallery Grid */}
+      <div className="container mx-auto px-4 md:px-8 py-16 flex-1">
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
           {galleryItems.map((item, i) => (
             <div key={i} className="break-inside-avoid rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group cursor-pointer">
@@ -53,11 +68,8 @@ export default function GalleryPage() {
         </div>
       </div>
 
-      <footer className="py-10 px-4 md:px-8 border-t border-border text-center" style={{ background: 'hsl(var(--coffee-espresso))' }}>
-        <p className="text-sm" style={{ color: 'hsl(var(--cream) / 0.6)' }}>
-          © {new Date().getFullYear()} Coffee Life Café | Designed by Reagan Otema
-        </p>
-      </footer>
+      {/* ✅ Shared Footer */}
+      <Footer />
     </div>
   );
 }

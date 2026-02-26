@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, Clock, Phone, Star, ChevronRight } from 'lucide-react';
+import { ArrowRight, MapPin, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { branches, branchMenus } from '@/data/menuData';
+import Footer from '@/components/Footer'; // ✅ Professional Footer
+import MenuItemCard from '@/components/MenuItemCard';
 
 import hero1 from '@/assets/hero-cafe.jpg';
-import hero2 from '@/assets/header.webp';
+import hero2 from '@/assets/hero2.jpg';
 import hero3 from '@/assets/mocha.jpg';
 import hero4 from '@/assets/juie.jpg';
 import hero5 from '@/assets/lounge-view.jpeg';
-
 import foodSpreadImg from '@/assets/food-spread.jpg';
 import galleryCafeImg from '@/assets/gallery-cafe.jpg';
-import MenuItemCard from '@/components/MenuItemCard';
+import logoImg from '@/assets/logo.png'; // ✅ Page logo
 
 export default function Index() {
   const { selectedBranch, setSelectedBranch, speak, setIsCartOpen } = useApp();
@@ -32,11 +33,15 @@ export default function Index() {
   /* =============================================== */
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
 
-      {/* HERO */}
+      {/* ================= PAGE LOGO ================= */}
+      <div className="py-6 px-4 md:px-8 text-center">
+        <img src={logoImg} alt="Coffee Life Logo" className="mx-auto w-44 h-auto" />
+      </div>
+
+      {/* ================= HERO ================= */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-
         {/* Background Slider */}
         <div className="absolute inset-0">
           {heroImages.map((img, index) => (
@@ -89,9 +94,7 @@ export default function Index() {
               <Link
                 to="/menu"
                 onClick={() =>
-                  speak(
-                    'Welcome! Browse our delicious menu and select your favourite items.'
-                  )
+                  speak('Welcome! Browse our delicious menu and select your favourite items.')
                 }
                 className="btn-gold flex items-center gap-2 text-base"
               >
@@ -122,9 +125,7 @@ export default function Index() {
               key={b.id}
               onClick={() => setSelectedBranch(b.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                selectedBranch === b.id
-                  ? 'scale-105 shadow-lg'
-                  : 'opacity-70 hover:opacity-90'
+                selectedBranch === b.id ? 'scale-105 shadow-lg' : 'opacity-70 hover:opacity-90'
               }`}
               style={
                 selectedBranch === b.id
@@ -142,7 +143,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* FEATURED ITEMS */}
+      {/* ================= FEATURED ITEMS ================= */}
       <section className="py-20 container mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
           <h2 className="section-title">Popular at {branch.shortName}</h2>
@@ -161,39 +162,30 @@ export default function Index() {
         </div>
       </section>
 
-      {/* GALLERY SNIPPET */}
+      {/* ================= GALLERY SNIPPET ================= */}
       <section className="py-20 px-4 md:px-8 bg-muted/40">
         <div className="container mx-auto">
           <h2 className="section-title">Our Story in Moments</h2>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[galleryCafeImg, hero1, foodSpreadImg, hero2, hero3, hero4].map(
-              (img, i) => (
-                <div
-                  key={i}
-                  className="aspect-square overflow-hidden rounded-xl hover:scale-[1.03] transition-transform duration-300 shadow-md"
-                >
-                  <img
-                    src={img}
-                    alt={`Gallery ${i + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              )
-            )}
+            {[galleryCafeImg, hero1, foodSpreadImg, hero2, hero3, hero4].map((img, i) => (
+              <div
+                key={i}
+                className="aspect-square overflow-hidden rounded-xl hover:scale-[1.03] transition-transform duration-300 shadow-md"
+              >
+                <img
+                  src={img}
+                  alt={`Gallery ${i + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer
-        className="py-12 px-4 md:px-8 border-t border-border"
-        style={{ background: 'hsl(var(--coffee-espresso))' }}
-      >
-        <div className="container mx-auto text-center text-sm text-white/70">
-          © {new Date().getFullYear()} Coffee Life Café. All rights reserved.
-        </div>
-      </footer>
+      {/* ================= PROFESSIONAL FOOTER ================= */}
+      <Footer />
     </div>
   );
 }
