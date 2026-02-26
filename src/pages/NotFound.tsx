@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import footer from "@/components/footer
+import Footer from '@/components/footer';  // Capital F, proper quotes, semicolon
 import logoImg from "@/assets/logo.png"; // ✅ Page logo
 
 const NotFound = () => {
@@ -33,7 +33,7 @@ const NotFound = () => {
       </div>
 
       {/* ================= PROFESSIONAL FOOTER ================= */}
-      <footer/>
+      <Footer/>
     </div>
   );
 };

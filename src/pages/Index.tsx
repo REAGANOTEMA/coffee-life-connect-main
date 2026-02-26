@@ -3,7 +3,7 @@ import { ArrowRight, MapPin, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { branches, branchMenus } from '@/data/menuData';
-import footer from '@/components/footer
+import Footer from '@/components/footer';  // Capital F, proper quotes, semicolon
 import MenuItemCard from '@/components/MenuItemCard';
 
 import hero1 from '@/assets/hero-cafe.jpg';
@@ -185,7 +185,7 @@ export default function Index() {
       </section>
 
       {/* ================= FOOTER ================= */}
-      <footer/>
+      <Footer/>
     </div>
   );
 }
