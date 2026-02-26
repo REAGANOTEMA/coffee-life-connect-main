@@ -3,7 +3,7 @@ import { Search } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import { branches, branchMenus, allCategories, categoryIcons, MenuCategory } from '@/data/menuData';
 import MenuItemCard from '@/components/MenuItemCard';
-import Footer from '@/components/footer'; // ✅ Professional Footer
+import footer from '@/components/footer'; // ✅ Professional Footer
 import logoImg from '@/assets/logo.png'; // ✅ Page logo
 
 export default function MenuPage() {

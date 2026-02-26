@@ -3,7 +3,7 @@ import { ArrowRight, MapPin, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { branches, branchMenus } from '@/data/menuData';
-import Footer from '@/components/footer';
+import footer from '@/components/footer';
 import MenuItemCard from '@/components/MenuItemCard';
 
 import hero1 from '@/assets/hero-cafe.jpg';
