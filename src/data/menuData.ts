@@ -14,7 +14,10 @@ export type MenuCategory =
   | 'Beverages'
   | 'Juices & Smoothies'
   | 'Soft Drinks';
-
+  export type BranchId =
+  | 'jinja-highway'
+  | 'jinja-lakeview'
+  | 'kampala';
 export interface MenuItem {
   id: string;
   name: string;
@@ -28,7 +31,7 @@ export interface MenuItem {
 }
 
 export interface Branch {
-  id: string;
+  id: BranchId;
   name: string;
   shortName: string;
   address: string;
@@ -236,7 +239,7 @@ const beveragesMenu: MenuItem[] = [
 ];
 
 // Branch-specific menus (some items differ per branch)
-export const branchMenus: Record<string, MenuItem[]> = {
+export const branchMenus: Record<BranchId, MenuItem[]> = {
   'jinja-highway': [
     ...pastriesMenu,
     ...lightBitesMenu,
