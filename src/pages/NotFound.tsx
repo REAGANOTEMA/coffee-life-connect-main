@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import Footer from "@/components/Footer"; // ✅ Professional Footer
+import Footer from "@/components/footer"; // ✅ Professional Footer
 import logoImg from "@/assets/logo.png"; // ✅ Page logo
 
 const NotFound = () => {
@@ -33,7 +33,7 @@ const NotFound = () => {
       </div>
 
       {/* ================= PROFESSIONAL FOOTER ================= */}
-      <Footer />
+      <footer/>
     </div>
   );
 };

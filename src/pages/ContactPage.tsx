@@ -1,7 +1,7 @@
 import { MapPin, Phone, Clock, MessageCircle, Mail, ArrowRight } from 'lucide-react';
 import { branches } from '@/data/menuData';
 import { useState } from 'react';
-import Footer from '@/components/Footer';
+import {Footer from} '@/components/footer';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', branch: 'jinja-highway' });
@@ -117,7 +117,7 @@ export default function ContactPage() {
         </div>
       </main>
 
-      <Footer />
+      <footer/>
     </div>
   );
 }
