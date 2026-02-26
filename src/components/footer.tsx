@@ -1,5 +1,6 @@
-import QRCode from "qrcode.react";
+import { QRCodeSVG } from "qrcode.react"; // ✅ named import
 import { FaFacebookF, FaYoutube, FaTwitter, FaTiktok, FaInstagram } from "react-icons/fa";
+import logoImg from "@/assets/logo.png"; // ✅ your real logo
 
 export default function Footer() {
   return (
@@ -9,7 +10,7 @@ export default function Footer() {
         {/* BRAND */}
         <div>
           <img
-            src="/assets/logo.png"
+            src={logoImg} // ✅ use imported logo
             alt="Coffee Life Logo"
             width={140}
             height={60}
@@ -21,19 +22,19 @@ export default function Footer() {
 
           {/* SOCIAL LINKS */}
           <div className="flex gap-4 mt-4 text-white/80 dark:text-gray-300">
-            <a href="https://facebook.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors" aria-label="Facebook">
+            <a href="https://facebook.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">
               <FaFacebookF />
             </a>
-            <a href="https://youtube.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors" aria-label="YouTube">
+            <a href="https://youtube.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">
               <FaYoutube />
             </a>
-            <a href="https://twitter.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors" aria-label="Twitter">
+            <a href="https://twitter.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">
               <FaTwitter />
             </a>
-            <a href="https://tiktok.com/@coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors" aria-label="TikTok">
+            <a href="https://tiktok.com/@coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">
               <FaTiktok />
             </a>
-            <a href="https://instagram.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors" aria-label="Instagram">
+            <a href="https://instagram.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">
               <FaInstagram />
             </a>
           </div>
@@ -60,7 +61,7 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold mb-4 text-white dark:text-gray-100">Scan to Visit</h4>
           <div className="bg-white p-3 rounded-xl inline-block">
-            <QRCode
+            <QRCodeSVG
               value="https://coffeelife.cafe"
               size={120}
               includeMargin
