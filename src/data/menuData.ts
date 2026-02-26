@@ -121,19 +121,19 @@ export const branches: Branch[] = [
 
 const pastriesMenu: MenuItem[] = [
   { id: 'p1', name: 'Red Velvet Sliced', description: 'Moist red velvet cake with cream cheese frosting', price: 10000, category: 'Pastries & Cakes', popular: true, image: '/images/menu/red-velvet.jpeg' },
-  { id: 'p2', name: 'Black Forest Sliced', description: 'Chocolate cake layered with cherries and whipped cream', price: 10000, category: 'Pastries & Cakes', popular: true, image: '/images/menu/Black-Forest-Cake.webp' },
+  { id: 'p2', name: 'Black Forest Sliced', description: 'Chocolate cake layered with cherries and whipped cream', price: 10000, category: 'Pastries & Cakes', popular: true, image: '/images/menu/black-forest-cake.webp' },
   { id: 'p3', name: 'Vanilla Sliced', description: 'Classic vanilla sponge with smooth buttercream', price: 7000, category: 'Pastries & Cakes', image: '/images/menu/vanilla-cake.webp' },
   { id: 'p4', name: 'Madeline Cake', description: 'Soft buttery French-style shell cake', price: 6000, category: 'Pastries & Cakes', image: '/images/menu/madeline-cake.jpg' },
-  { id: 'p5', name: 'Marble Cake', description: 'Beautiful swirl of chocolate and vanilla', price: 5000, category: 'Pastries & Cakes', image: '/images/menu/Marble Cake.jpg' },
-  { id: 'p6', name: 'Chocolate Donut', description: 'Fluffy donut glazed with rich chocolate', price: 6000, category: 'Pastries & Cakes', popular: true, image: '/images/menu/choccolate-donut.webp' },
-  { id: 'p7', name: 'Plain Donut', description: 'Classic soft glazed donut', price: 4000, category: 'Pastries & Cakes', image: '/images/menu/Plain Donuts.webp' },
+  { id: 'p5', name: 'Marble Cake', description: 'Beautiful swirl of chocolate and vanilla', price: 5000, category: 'Pastries & Cakes', image: '/images/menu/marble-cake.jpg' },
+  { id: 'p6', name: 'Chocolate Donut', description: 'Fluffy donut glazed with rich chocolate', price: 6000, category: 'Pastries & Cakes', popular: true, image: '/images/menu/chocolate-donut.webp' },
+  { id: 'p7', name: 'Plain Donut', description: 'Classic soft glazed donut', price: 4000, category: 'Pastries & Cakes', image: '/images/menu/plain-donut.webp' },
   { id: 'p8', name: 'Kibabs', description: 'Crispy golden pastry rolls with savory filling', price: 5000, category: 'Pastries & Cakes', image: '/images/menu/kibabs.jpg' },
-  { id: 'p9', name: 'Chocolate Muffins', description: 'Moist chocolate muffin with chocolate chips', price: 7000, category: 'Pastries & Cakes', image: '/images/menu/choccolate-maffins.webp' },
+  { id: 'p9', name: 'Chocolate Muffins', description: 'Moist chocolate muffin with chocolate chips', price: 7000, category: 'Pastries & Cakes', image: '/images/menu/chocolate-muffins.webp' },
   { id: 'p10', name: 'Milk Muffins', description: 'Soft milk-based muffin, lightly sweet', price: 5000, category: 'Pastries & Cakes', image: '/images/menu/milk-muffins.webp' },
-  { id: 'p11', name: 'Lemon Muffins', description: 'Zesty lemon muffin with a tangy glaze', price: 7000, category: 'Pastries & Cakes', image: '/images/menu/lemon muffins.webp' },
+  { id: 'p11', name: 'Lemon Muffins', description: 'Zesty lemon muffin with a tangy glaze', price: 7000, category: 'Pastries & Cakes', image: '/images/menu/lemon-muffins.webp' },
   { id: 'p12', name: 'Cheese Croissant', description: 'Buttery croissant filled with melted cheese', price: 5000, category: 'Pastries & Cakes', popular: true, image: '/images/menu/cheese-croissant.webp' },
-  { id: 'p13', name: 'Plain Croissant', description: 'Flaky golden butter croissant', price: 6000, category: 'Pastries & Cakes', image: '/images/menu/plain-croissants.webp' },
-  { id: 'p14', name: 'Chocolate Croissant', description: 'Croissant filled with dark chocolate', price: 7000, category: 'Pastries & Cakes', image: '/images/menu/choccolate-croissant.jpg' },
+  { id: 'p13', name: 'Plain Croissant', description: 'Flaky golden butter croissant', price: 6000, category: 'Pastries & Cakes', image: '/images/menu/plain-croissant.webp' },
+  { id: 'p14', name: 'Chocolate Croissant', description: 'Croissant filled with dark chocolate', price: 7000, category: 'Pastries & Cakes', image: '/images/menu/chocolate-croissant.jpg' },
 ];
 
 const lightBitesMenu: MenuItem[] = [
