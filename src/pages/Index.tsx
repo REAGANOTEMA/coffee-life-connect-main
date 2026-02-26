@@ -3,7 +3,7 @@ import { ArrowRight, MapPin, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { branches, branchMenus } from '@/data/menuData';
-import Footer from '@/components/Footer'; // ✅ Professional Footer
+import Footer from '@/components/Footer';
 import MenuItemCard from '@/components/MenuItemCard';
 
 import hero1 from '@/assets/hero-cafe.jpg';
@@ -13,24 +13,24 @@ import hero4 from '@/assets/juie.jpg';
 import hero5 from '@/assets/lounge-view.jpeg';
 import foodSpreadImg from '@/assets/food-spread.jpg';
 import galleryCafeImg from '@/assets/gallery-cafe.jpg';
-import logoImg from '@/assets/logo.png'; // ✅ Page logo
+import logoImg from '@/assets/logo.png';
 
 export default function Index() {
   const { selectedBranch, setSelectedBranch, speak, setIsCartOpen } = useApp();
   const branch = branches.find(b => b.id === selectedBranch)!;
   const featuredItems = branchMenus[selectedBranch]?.filter(i => i.popular).slice(0, 6) || [];
 
-  /* ================= HERO SLIDER ================= */
+  // ================= HERO SLIDER =================
   const heroImages = [hero1, hero2, hero3, hero4, hero5];
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+      setCurrentSlide(prev => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
-  /* =============================================== */
+  // ===============================================
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -184,7 +184,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ================= PROFESSIONAL FOOTER ================= */}
+      {/* ================= FOOTER ================= */}
       <Footer />
     </div>
   );

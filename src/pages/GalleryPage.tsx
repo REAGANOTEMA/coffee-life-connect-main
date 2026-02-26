@@ -1,9 +1,8 @@
-import Image from 'next/image';
 import heroCafeImg from '@/assets/manager-staff.jpeg';
 import foodSpreadImg from '@/assets/chefs1.jpeg';
 import galleryCafeImg from '@/assets/space2.jpg';
-import Footer from '@/components/Footer'; // ✅ Shared professional Footer
-import logoImg from '@/assets/logo.png';   // ✅ Page logo
+import logoImg from '@/assets/logo.png';
+import Footer from '@/components/Footer';
 
 const galleryItems = [
   { img: heroCafeImg, caption: 'Welcome to Coffee Life House', desc: 'Located opposite the Police Barracks, Jinja, every aroma tells a story.' },
@@ -22,13 +21,7 @@ export default function GalleryPage() {
     <div className="min-h-screen flex flex-col">
       {/* Page Logo */}
       <div className="py-6 px-4 md:px-8 text-center">
-        <Image
-          src={logoImg}
-          alt="Coffee Life Logo"
-          width={180}
-          height={60}
-          className="mx-auto"
-        />
+        <img src={logoImg} alt="Coffee Life Logo" className="mx-auto" width={180} height={60} />
       </div>
 
       {/* Header */}
@@ -68,7 +61,7 @@ export default function GalleryPage() {
         </div>
       </div>
 
-      {/* ✅ Shared Footer */}
+      {/* Shared Footer */}
       <Footer />
     </div>
   );

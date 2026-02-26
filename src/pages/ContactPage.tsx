@@ -1,15 +1,17 @@
 import { MapPin, Phone, Clock, MessageCircle, Mail, ArrowRight } from 'lucide-react';
 import { branches } from '@/data/menuData';
 import { useState } from 'react';
-import Footer from '@/components/Footer'; // <-- import your shared Footer
+import Footer from '@/components/Footer';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', branch: 'jinja-highway' });
 
   const handleWhatsApp = () => {
-    const msg = encodeURIComponent(`Hi Coffee Life Café! My name is ${formData.name}.\n\n${formData.message}`);
     const branch = branches.find(b => b.id === formData.branch);
-    window.open(`https://wa.me/${branch?.whatsapp.replace(/\D/g,'')}?text=${msg}`, '_blank');
+    if (!branch?.whatsapp) return alert('WhatsApp number not available for this branch');
+
+    const msg = encodeURIComponent(`Hi Coffee Life Café! My name is ${formData.name}.\n\n${formData.message}`);
+    window.open(`https://wa.me/${branch.whatsapp.replace(/\D/g,'')}?text=${msg}`, '_blank');
   };
 
   return (
@@ -28,13 +30,13 @@ export default function ContactPage() {
       </div>
 
       <main className="flex-1 container mx-auto px-4 md:px-8 py-16">
-        {/* Contact form & info */}
+        {/* Contact Form & Info */}
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           <div>
             <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Send Us a Message</h2>
             <div className="space-y-4">
-              <inputField label="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
-              <inputField label="Email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} type="email"/>
+              <InputField label="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+              <InputField label="Email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} type="email"/>
               <div>
                 <label className="block text-sm font-semibold mb-1.5">Branch</label>
                 <select value={formData.branch} onChange={e => setFormData({...formData, branch: e.target.value})} className="input-field">
@@ -52,6 +54,7 @@ export default function ContactPage() {
           </div>
 
           <div>
+            {/* Direct Contact */}
             <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Direct Contact</h2>
             <div className="space-y-4">
               {[{ icon: <Phone size={18} />, label: 'Phone', value: '0746 888 730 / 0784 305 795' },
@@ -68,12 +71,6 @@ export default function ContactPage() {
                   </div>
                 </div>
               ))}
-            </div>
-            <div className="mt-6 p-4 rounded-xl border border-border bg-muted/30">
-              <h3 className="font-bold mb-2">Our Promise to You</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                High-quality ingredients, quick delivery, friendly service, and an inviting atmosphere — that's our daily promise to you at Coffee Life Café.
-              </p>
             </div>
           </div>
         </div>
@@ -111,8 +108,7 @@ export default function ContactPage() {
                     <Phone size={14} style={{ color: 'hsl(var(--gold))' }} /> {b.phone}
                   </div>
                 </div>
-                <a href={b.mapUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm font-semibold hover:underline" style={{ color: 'hsl(var(--primary))' }}>
+                <a href={b.mapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold hover:underline" style={{ color: 'hsl(var(--primary))' }}>
                   Open in Maps <ArrowRight size={14} />
                 </a>
               </div>
@@ -121,14 +117,13 @@ export default function ContactPage() {
         </div>
       </main>
 
-      {/* Shared Footer */}
       <Footer />
     </div>
   );
 }
 
-// Optional helper component for input fields
-function inputField({ label, value, onChange, type = 'text' }: any) {
+// Fixed InputField component
+function InputField({ label, value, onChange, type = 'text' }: any) {
   return (
     <div>
       <label className="block text-sm font-semibold mb-1.5">{label}</label>
