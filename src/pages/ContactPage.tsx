@@ -1,17 +1,18 @@
 import { MapPin, Phone, Clock, MessageCircle, Mail, ArrowRight } from 'lucide-react';
 import { branches } from '@/data/menuData';
-import  useState from 'react';
-import Footer from '@/components/footer';  // Capital F, proper quotes, semicolon
+import { useState } from 'react';
+import Footer from '@/components/footer';  // Capital F
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', branch: 'jinja-highway' });
 
-  const handleWhatsApp = () => {
-    const branch = branches.find(b => b.id === formData.branch);
-    if (!branch?.whatsapp) return alert('WhatsApp number not available for this branch');
-
-    const msg = encodeURIComponent(`Hi Coffee Life Café! My name is ${formData.name}.\n\n${formData.message}`);
-    window.open(`https://wa.me/${branch.whatsapp.replace(/\D/g,'')}?text=${msg}`, '_blank');
+  // Send form directly to email
+  const handleEmail = () => {
+    const subject = encodeURIComponent(`Message from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nBranch: ${formData.branch}\n\nMessage:\n${formData.message}`
+    );
+    window.open(`mailto:food@coffeelife.cafe?subject=${subject}&body=${body}`, '_blank');
   };
 
   return (
@@ -25,49 +26,57 @@ export default function ContactPage() {
           Contact & Locations
         </h1>
         <p className="text-base" style={{ color: 'hsl(var(--cream) / 0.7)' }}>
-          Visit us, call us, or send a WhatsApp — we're always ready to serve you
+          Visit us, call us, or send an email — we're always ready to serve you
         </p>
       </div>
 
       <main className="flex-1 container mx-auto px-4 md:px-8 py-16">
-        {/* Contact Form & Info */}
+        {/* Contact Form & Direct Contact */}
         <div className="grid md:grid-cols-2 gap-12 mb-16">
+          {/* Contact Form */}
           <div>
             <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Send Us a Message</h2>
             <div className="space-y-4">
-              <InputField label="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
-              <InputField label="Email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} type="email"/>
+              <InputField label="Your Name" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} />
+              <InputField label="Email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" />
               <div>
                 <label className="block text-sm font-semibold mb-1.5">Branch</label>
-                <select value={formData.branch} onChange={e => setFormData({...formData, branch: e.target.value})} className="input-field">
+                <select value={formData.branch} onChange={e => setFormData({ ...formData, branch: e.target.value })} className="input-field">
                   {branches.map(b => <option key={b.id} value={b.id}>{b.shortName}</option>)}
                 </select>
               </div>
               <div>
                 <label className="block text-sm font-semibold mb-1.5">Message</label>
-                <textarea rows={4} placeholder="Your message..." value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="input-field resize-none" />
+                <textarea
+                  rows={4}
+                  placeholder="Your message..."
+                  value={formData.message}
+                  onChange={e => setFormData({ ...formData, message: e.target.value })}
+                  className="input-field resize-none"
+                />
               </div>
-              <button onClick={handleWhatsApp} className="btn-gold w-full flex items-center justify-center gap-2">
-                <MessageCircle size={18} /> Send via WhatsApp
+              <button onClick={handleEmail} className="btn-gold w-full flex items-center justify-center gap-2">
+                <Mail size={18} /> Send via Email
               </button>
             </div>
           </div>
 
+          {/* Direct Contact */}
           <div>
-            {/* Direct Contact */}
             <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Direct Contact</h2>
             <div className="space-y-4">
-              {[{ icon: <Phone size={18} />, label: 'Phone', value: '0746 888 730 / 0784 305 795' },
+              {[
+                { icon: <Phone size={18} />, label: 'Phone', value: '0746 888 730 / 0784 305 795' },
                 { icon: <MessageCircle size={18} />, label: 'WhatsApp', value: '+256 746 888 730' },
-                { icon: <Mail size={18} />, label: 'Email', value: 'info@coffeelifecafe.ug' },
+                { icon: <Mail size={18} />, label: 'Email', value: 'food@coffeelife.cafe' },
               ].map(item => (
-                <div key={item.label} className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'hsl(var(--secondary))', color: 'hsl(var(--primary))' }}>
+                <div key={item.label} className="flex items-center gap-4 p-4 rounded-xl border border-gray-300 bg-white dark:bg-gray-800">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center bg-amber-400 text-white">
                     {item.icon}
                   </div>
                   <div>
-                    <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{item.label}</div>
-                    <div className="font-semibold">{item.value}</div>
+                    <div className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">{item.label}</div>
+                    <div className="font-semibold text-gray-900 dark:text-gray-100">{item.value}</div>
                   </div>
                 </div>
               ))}
