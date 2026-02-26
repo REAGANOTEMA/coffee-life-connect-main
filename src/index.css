@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Coffee Life Café - Warm Espresso & Gold Palette */
+    --background: 38 40% 97%;
+    --foreground: 25 40% 12%;
+
+    --card: 38 35% 98%;
+    --card-foreground: 25 40% 12%;
+
+    --popover: 38 35% 98%;
+    --popover-foreground: 25 40% 12%;
+
+    --primary: 25 67% 33%;
+    --primary-foreground: 38 60% 96%;
+
+    --secondary: 38 50% 88%;
+    --secondary-foreground: 25 50% 22%;
+
+    --muted: 38 30% 92%;
+    --muted-foreground: 25 25% 45%;
+
+    --accent: 43 85% 46%;
+    --accent-foreground: 25 40% 12%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 38 60% 96%;
+
+    --border: 38 30% 82%;
+    --input: 38 30% 82%;
+    --ring: 25 67% 33%;
+
+    --radius: 0.75rem;
+
+    /* Custom café tokens */
+    --coffee-espresso: 25 60% 18%;
+    --coffee-dark: 25 55% 25%;
+    --coffee-medium: 25 67% 33%;
+    --coffee-light: 30 45% 52%;
+    --coffee-cream: 38 70% 88%;
+    --gold-dark: 40 75% 38%;
+    --gold: 43 85% 46%;
+    --gold-light: 45 90% 65%;
+    --cream: 38 60% 96%;
+    --warm-white: 38 40% 99%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(25 60% 18%) 0%, hsl(25 50% 28%) 50%, hsl(30 45% 35%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(43 85% 46%) 0%, hsl(45 90% 65%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(38 35% 98%) 0%, hsl(38 30% 95%) 100%);
+    --shadow-warm: 0 4px 24px -4px hsl(25 67% 33% / 0.25);
+    --shadow-gold: 0 4px 20px -4px hsl(43 85% 46% / 0.4);
+    --shadow-card: 0 2px 12px -2px hsl(25 40% 12% / 0.12);
+
+    /* Sidebar */
+    --sidebar-background: 25 55% 20%;
+    --sidebar-foreground: 38 60% 92%;
+    --sidebar-primary: 43 85% 46%;
+    --sidebar-primary-foreground: 25 40% 12%;
+    --sidebar-accent: 25 50% 28%;
+    --sidebar-accent-foreground: 38 60% 92%;
+    --sidebar-border: 25 45% 28%;
+    --sidebar-ring: 43 85% 46%;
+  }
+
+  .dark {
+    --background: 25 55% 8%;
+    --foreground: 38 55% 92%;
+    --card: 25 50% 11%;
+    --card-foreground: 38 55% 92%;
+    --popover: 25 50% 11%;
+    --popover-foreground: 38 55% 92%;
+    --primary: 43 85% 50%;
+    --primary-foreground: 25 60% 10%;
+    --secondary: 25 45% 18%;
+    --secondary-foreground: 38 55% 88%;
+    --muted: 25 40% 16%;
+    --muted-foreground: 38 25% 58%;
+    --accent: 43 85% 46%;
+    --accent-foreground: 25 60% 10%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 38 55% 92%;
+    --border: 25 40% 22%;
+    --input: 25 40% 22%;
+    --ring: 43 85% 46%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:opacity-90 transition-all duration-200 rounded-lg px-6 py-3 font-semibold shadow-md;
+    box-shadow: var(--shadow-warm);
+  }
+
+  .btn-gold {
+    background: var(--gradient-gold);
+    @apply text-foreground font-bold rounded-lg px-6 py-3 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
+    box-shadow: var(--shadow-gold);
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground transition-all duration-200 rounded-lg px-6 py-3 font-semibold;
+  }
+
+  .card-menu {
+    @apply rounded-xl overflow-hidden border border-border transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-center mb-2;
+    font-family: 'Playfair Display', serif;
+    color: hsl(var(--coffee-espresso));
+  }
+
+  .section-subtitle {
+    @apply text-center text-muted-foreground mb-10 text-lg;
+  }
+
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .gold-text {
+    color: hsl(var(--gold));
+  }
+
+  .gold-gradient-text {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-link {
+    @apply text-sm font-medium transition-colors duration-200 hover:text-accent relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300;
+    background: hsl(var(--gold));
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .category-chip {
+    @apply px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer border;
+  }
+
+  .category-chip.active {
+    background: hsl(var(--coffee-medium));
+    @apply text-primary-foreground border-transparent shadow-md;
+  }
+
+  .category-chip:not(.active) {
+    @apply border-border text-muted-foreground hover:border-primary hover:text-primary bg-card;
+  }
+
+  .badge-promo {
+    background: var(--gradient-gold);
+    @apply text-xs font-bold px-2 py-0.5 rounded-full;
+    color: hsl(var(--coffee-espresso));
+  }
+
+  .cart-drawer {
+    @apply fixed inset-y-0 right-0 w-full max-w-md bg-card border-l border-border shadow-2xl z-50 flex flex-col;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-200;
+  }
+
+  .voice-indicator {
+    @apply fixed bottom-6 right-6 z-40 flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium shadow-lg;
+    background: hsl(var(--coffee-espresso));
+    color: hsl(var(--cream));
+    animation: pulse-soft 2s infinite;
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+  }
+
+  @keyframes slide-in-right {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes fade-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes bounce-in {
+    0% { transform: scale(0.8); opacity: 0; }
+    60% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .animate-slide-in { animation: slide-in-right 0.35s ease-out; }
+  .animate-fade-up { animation: fade-up 0.5s ease-out; }
+  .animate-bounce-in { animation: bounce-in 0.4s ease-out; }
+
+  .star-rating span {
+    @apply cursor-pointer text-2xl transition-transform duration-150 hover:scale-125;
+  }
+}
