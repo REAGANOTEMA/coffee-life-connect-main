@@ -21,19 +21,19 @@ export default function Footer() {
 
           {/* SOCIAL LINKS */}
           <div className="flex gap-4 mt-4 text-white/80 dark:text-gray-300">
-            <a href="https://facebook.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">
+            <a href="https://facebook.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors" aria-label="Facebook">
               <FaFacebookF />
             </a>
-            <a href="https://youtube.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">
+            <a href="https://youtube.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors" aria-label="YouTube">
               <FaYoutube />
             </a>
-            <a href="https://twitter.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">
+            <a href="https://twitter.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors" aria-label="Twitter">
               <FaTwitter />
             </a>
-            <a href="https://tiktok.com/@coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">
+            <a href="https://tiktok.com/@coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors" aria-label="TikTok">
               <FaTiktok />
             </a>
-            <a href="https://instagram.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">
+            <a href="https://instagram.com/coffeelife" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors" aria-label="Instagram">
               <FaInstagram />
             </a>
           </div>
@@ -45,7 +45,6 @@ export default function Footer() {
           <div className="flex flex-col gap-2 text-white/70 dark:text-gray-300 text-sm">
             <a href="/" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">Home</a>
             <a href="/menu" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">Menu</a>
-            <a href="/about" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">About</a>
             <a href="/gallery" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">Gallery</a>
             <a href="/contact" className="hover:text-amber-400 dark:hover:text-amber-500 transition-colors">Contact</a>
           </div>
