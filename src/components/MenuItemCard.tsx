@@ -30,18 +30,31 @@ export default function MenuItemCard({ item }: MenuItemCardProps) {
 
   return (
     <div className={`card-menu flex flex-col h-full ${item.isPromo ? 'ring-2 ring-offset-1 ring-gold' : ''}`}>
-      {/* Image / Emoji placeholder */}
+      
+      {/* ================= IMAGE / EMOJI ================= */}
       <div
-        className="relative h-32 flex items-center justify-center text-6xl overflow-hidden"
+        className="relative h-32 flex items-center justify-center overflow-hidden rounded-md bg-gray-100"
         style={{
           background: item.isPromo
             ? 'linear-gradient(135deg, hsl(43 85% 46% / 0.15), hsl(25 67% 33% / 0.1))'
-            : 'hsl(var(--muted))',
+            : undefined,
         }}
       >
-        <span className="select-none">{categoryEmojis[item.category] || '🍽️'}</span>
+        {item.image ? (
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              // fallback to emoji if image fails
+              (e.currentTarget as HTMLImageElement).style.display = 'none';
+            }}
+          />
+        ) : (
+          <span className="text-6xl select-none">{categoryEmojis[item.category] || '🍽️'}</span>
+        )}
 
-        {/* Promo Badge */}
+        {/* ================= PROMO BADGE ================= */}
         {item.isPromo && (
           <div className="absolute top-2 left-2">
             <span className="badge-promo flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-gold/20 text-gold">
@@ -50,7 +63,7 @@ export default function MenuItemCard({ item }: MenuItemCardProps) {
           </div>
         )}
 
-        {/* Popular Badge */}
+        {/* ================= POPULAR BADGE ================= */}
         {item.popular && !item.isPromo && (
           <div className="absolute top-2 right-2">
             <span
@@ -62,7 +75,7 @@ export default function MenuItemCard({ item }: MenuItemCardProps) {
           </div>
         )}
 
-        {/* Cart Quantity */}
+        {/* ================= CART QUANTITY ================= */}
         {inCart && (
           <div
             className="absolute bottom-2 right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
@@ -73,7 +86,7 @@ export default function MenuItemCard({ item }: MenuItemCardProps) {
         )}
       </div>
 
-      {/* Content */}
+      {/* ================= CONTENT ================= */}
       <div className="p-3 flex flex-col flex-1">
         <h3 className="font-semibold text-sm leading-tight line-clamp-2 mb-1">{item.name}</h3>
         <p className="text-xs text-muted-foreground line-clamp-2 flex-1 mb-3">{item.description}</p>
