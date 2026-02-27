@@ -5,7 +5,7 @@ import { useApp } from '@/context/AppContext';
 import { branches, branchMenus, MenuItem } from '@/data/menuData';
 
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Footer from '@/components/footer';
 import MenuItemCard from '@/components/MenuItemCard';
 import AuthModal from '@/components/AuthModal';
 
