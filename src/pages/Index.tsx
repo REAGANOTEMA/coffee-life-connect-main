@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useApp } from '@/context/AppContext';
-import { branches, branchMenus } from '@/data/menuData';
-import Footer from '@/components/footer';  // Capital F, proper quotes, semicolon
+import { branches, branchMenus, MenuItem } from '@/data/menuData';
+import Footer from '@/components/footer';
 import MenuItemCard from '@/components/MenuItemCard';
+import { predictTopItems } from '@/utils/AiSalesPredictions';
 
 import hero1 from '@/assets/hero-cafe.jpg';
 import hero2 from '@/assets/hero2.jpg';
@@ -18,7 +19,27 @@ import logoImg from '@/assets/logo.png';
 export default function Index() {
   const { selectedBranch, setSelectedBranch, speak, setIsCartOpen } = useApp();
   const branch = branches.find(b => b.id === selectedBranch)!;
+
+  // Popular featured items (pre-selected by admin)
   const featuredItems = branchMenus[selectedBranch]?.filter(i => i.popular).slice(0, 6) || [];
+
+  // ================= AI Top Items =================
+  const [topItems, setTopItems] = useState<MenuItem[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const items = await predictTopItems(selectedBranch);
+        setTopItems(
+          items
+            .map(([name]) => branchMenus[selectedBranch].find(i => i.name === name))
+            .filter(Boolean) as MenuItem[]
+        );
+      } catch (err) {
+        console.error('Error fetching top items:', err);
+      }
+    })();
+  }, [selectedBranch]);
 
   // ================= HERO SLIDER =================
   const heroImages = [hero1, hero2, hero3, hero4, hero5];

@@ -1,0 +1,16 @@
+export const categoryIcons: Record<string, string> = {
+  'Pastries & Cakes': '🥐',
+  'Light Bites': '🥗',
+  'Breakfast': '🍳',
+  'Beef Dishes': '🥩',
+  'Goat Dishes': '🍖',
+  'Quesadillas': '🌮',
+  'Local Food': '🍛',
+  'Pizzas': '🍕',
+  'Curries & Soups': '🍲',
+  'Burgers': '🍔',
+  'Lunch & Dinner': '🍽️',
+  'Beverages': '☕',
+  'Juices & Smoothies': '🥤',
+  'Soft Drinks': '🧃',
+};

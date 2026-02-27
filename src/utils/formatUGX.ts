@@ -1,3 +1,3 @@
-export default function formatUGX(value: number) {
-  return `UGX ${value.toLocaleString()}`;
+export function formatUGX(amount: number) {
+  return amount.toLocaleString() + ' UGX';
 }
