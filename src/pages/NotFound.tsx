@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import Footer from '@/components/footer';  // Capital F, proper quotes, semicolon
+import Footer from '@/components/Footer';  // Capital F, proper quotes, semicolon
 import logoImg from "@/assets/logo.png"; // ✅ Page logo
 
 const NotFound = () => {

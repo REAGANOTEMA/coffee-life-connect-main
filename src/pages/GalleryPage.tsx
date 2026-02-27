@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import heroCafeImg from '@/assets/manager-staff.jpeg';
 import foodSpreadImg from '@/assets/chefs1.jpeg';
 import galleryCafeImg from '@/assets/space2.jpg';
-import Footer from '@/components/footer';// Capital F, proper quotes, semicolon
+import Footer from '@/components/Footer';// Capital F, proper quotes, semicolon
 
 const galleryItems = [
   { img: heroCafeImg, caption: 'Welcome to Coffee Life House', desc: 'Located opposite the Police Barracks, Jinja, every aroma tells a story.' },
