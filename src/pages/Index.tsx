@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, ChevronRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { branches, branchMenus, MenuItem } from '@/data/menuData';
-import Footer from '@/components/footer';
+import Footer from '@/components/Footer';
 import MenuItemCard from '@/components/MenuItemCard';
 import { predictTopItems } from '@/utils/aiSalesPrediction';
 
@@ -20,28 +20,25 @@ export default function Index() {
   const { selectedBranch, setSelectedBranch, speak, setIsCartOpen } = useApp();
   const branch = branches.find(b => b.id === selectedBranch)!;
 
-  // Popular featured items (pre-selected by admin)
+  // Featured menu items
   const featuredItems = branchMenus[selectedBranch]?.filter(i => i.popular).slice(0, 6) || [];
 
   // ================= AI Top Items =================
-const [topItems, setTopItems] = useState<MenuItem[]>([]);
+  const [topItems, setTopItems] = useState<MenuItem[]>([]);
 
-useEffect(() => {
-  const load = async () => {
-    try {
-      const results = await predictTopItems(selectedBranch);
-
-      // results = [MenuItem, qty]
-      setTopItems(results.map(([item]) => item));
-    } catch (err) {
-      console.error('Error fetching top items:', err);
-      setTopItems([]);
-    }
-  };
-
-  load();
-}, [selectedBranch]);
-
+  useEffect(() => {
+    const loadTopItems = async () => {
+      try {
+        const results = await predictTopItems(selectedBranch);
+        // results = [MenuItem, quantity][]
+        setTopItems(results.map(([item]) => item));
+      } catch (err) {
+        console.error('Error fetching top items:', err);
+        setTopItems([]);
+      }
+    };
+    loadTopItems();
+  }, [selectedBranch]);
 
   // ================= HERO SLIDER =================
   const heroImages = [hero1, hero2, hero3, hero4, hero5];
@@ -53,19 +50,9 @@ useEffect(() => {
     }, 5000);
     return () => clearInterval(interval);
   }, []);
-  // ===============================================
 
-  return (
-    <div className="min-h-screen flex flex-col">
-
-      {/* ================= PAGE LOGO ================= */}
-      <div className="py-6 px-4 md:px-8 text-center">
-        <img src={logoImg} alt="Coffee Life Logo" className="mx-auto w-44 h-auto" />
-      </div>
-
-      {/* ================= HERO ================= */}
+      {/* HERO SLIDER */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* Background Slider */}
         <div className="absolute inset-0">
           {heroImages.map((img, index) => (
             <img
@@ -77,8 +64,6 @@ useEffect(() => {
               }`}
             />
           ))}
-
-          {/* Gradient Overlay */}
           <div
             className="absolute inset-0"
             style={{
@@ -88,7 +73,6 @@ useEffect(() => {
           />
         </div>
 
-        {/* Hero Content */}
         <div className="relative container mx-auto px-4 md:px-8 py-24">
           <div className="max-w-2xl animate-fade-up">
             <div
@@ -116,9 +100,7 @@ useEffect(() => {
             <div className="flex flex-wrap gap-4">
               <Link
                 to="/menu"
-                onClick={() =>
-                  speak('Welcome! Browse our delicious menu and select your favourite items.')
-                }
+                onClick={() => speak('Welcome! Browse our delicious menu and select your favourite items.')}
                 className="btn-gold flex items-center gap-2 text-base"
               >
                 Browse Menu <ArrowRight size={18} />
@@ -130,10 +112,7 @@ useEffect(() => {
                   speak('Your cart is open.');
                 }}
                 className="btn-outline flex items-center gap-2 text-base"
-                style={{
-                  borderColor: 'hsl(var(--cream) / 0.5)',
-                  color: 'hsl(var(--cream))',
-                }}
+                style={{ borderColor: 'hsl(var(--cream) / 0.5)', color: 'hsl(var(--cream))' }}
               >
                 View Cart
               </button>
@@ -166,7 +145,7 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* ================= FEATURED ITEMS ================= */}
+      {/* FEATURED ITEMS */}
       <section className="py-20 container mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
           <h2 className="section-title">Popular at {branch.shortName}</h2>
@@ -185,30 +164,25 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* ================= GALLERY SNIPPET ================= */}
+      {/* GALLERY */}
       <section className="py-20 px-4 md:px-8 bg-muted/40">
         <div className="container mx-auto">
           <h2 className="section-title">Our Story in Moments</h2>
-
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[galleryCafeImg, hero1, foodSpreadImg, hero2, hero3, hero4].map((img, i) => (
               <div
                 key={i}
                 className="aspect-square overflow-hidden rounded-xl hover:scale-[1.03] transition-transform duration-300 shadow-md"
               >
-                <img
-                  src={img}
-                  alt={`Gallery ${i + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                <img src={img} alt={`Gallery ${i + 1}`} className="w-full h-full object-cover" />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ================= FOOTER ================= */}
-      <Footer/>
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 }

@@ -1,10 +1,10 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
-import { branches, branchMenus, allCategories, categoryIcons, MenuCategory } from '@/data/menuData';
+import { branches, branchMenus, allCategories, categoryIcons, MenuCategory, MenuItem } from '@/data/menuData';
 import MenuItemCard from '@/components/MenuItemCard';
-import Footer from '@/components/footer';  // Capital F, proper quotes, semicolon
-import logoImg from '@/assets/logo.png'; // ✅ Page logo
+import Footer from '@/components/Footer'; // ✅ Proper casing
+import logoImg from '@/assets/logo.png';
 
 export default function MenuPage() {
   const { selectedBranch, setSelectedBranch, speak } = useApp();
@@ -14,12 +14,13 @@ export default function MenuPage() {
   const branch = branches.find(b => b.id === selectedBranch)!;
   const allItems = branchMenus[selectedBranch] || [];
 
-  // Get categories available for this branch
+  // ===================== AVAILABLE CATEGORIES =====================
   const availableCategories = useMemo(() => {
     const cats = new Set(allItems.map(i => i.category));
     return allCategories.filter(c => cats.has(c));
   }, [allItems]);
 
+  // ===================== FILTERED ITEMS =====================
   const filtered = useMemo(() => {
     return allItems.filter(item => {
       const matchCat = activeCategory === 'All' || item.category === activeCategory;
@@ -36,6 +37,11 @@ export default function MenuPage() {
     if (cat !== 'All') speak(`Showing ${cat}. Browse and tap Add to include items in your cart.`);
   };
 
+  // ===================== AUTO SCROLL TO TOP WHEN BRANCH CHANGES =====================
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [selectedBranch]);
+
   return (
     <div className="min-h-screen flex flex-col">
 
@@ -45,7 +51,7 @@ export default function MenuPage() {
       </div>
 
       {/* ================= HEADER ================= */}
-      <div className="py-12 px-4 md:px-8 text-center" style={{ background: 'hsl(var(--coffee-espresso))' }}>
+      <header className="py-12 px-4 md:px-8 text-center" style={{ background: 'hsl(var(--coffee-espresso))' }}>
         <span className="text-sm font-semibold tracking-widest uppercase mb-2 block" style={{ color: 'hsl(var(--gold))' }}>
           Browse & Order
         </span>
@@ -61,8 +67,11 @@ export default function MenuPage() {
           {branches.map(b => (
             <button
               key={b.id}
-              onClick={() => { setSelectedBranch(b.id); speak(`Branch switched to ${b.shortName}.`); }}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${selectedBranch === b.id ? 'scale-105' : 'opacity-60 hover:opacity-80'}`}
+              onClick={() => {
+                setSelectedBranch(b.id);
+                speak(`Branch switched to ${b.shortName}.`);
+              }}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${selectedBranch === b.id ? 'scale-105 shadow-lg' : 'opacity-60 hover:opacity-80'}`}
               style={
                 selectedBranch === b.id
                   ? { background: 'hsl(var(--gold))', color: 'hsl(var(--coffee-espresso))' }
@@ -73,29 +82,28 @@ export default function MenuPage() {
             </button>
           ))}
         </div>
-      </div>
+      </header>
 
-      {/* ================= SEARCH ================= */}
+      {/* ================= SEARCH BAR ================= */}
       <div className="sticky top-16 z-30 bg-background/95 backdrop-blur-sm border-b border-border px-4 py-3">
         <div className="container mx-auto">
-          <div className="relative max-w-md">
+          <div className="relative max-w-md mx-auto">
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search menu items..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="input-field pl-10 py-2 text-sm"
+              className="input-field pl-10 py-2 text-sm w-full"
             />
           </div>
         </div>
       </div>
 
-      {/* ================= MENU GRID ================= */}
-      <div className="container mx-auto px-4 md:px-8 py-8 flex-1">
-
+      {/* ================= CATEGORY CHIPS & MENU GRID ================= */}
+      <main className="container mx-auto px-4 md:px-8 py-8 flex-1">
         {/* Category chips */}
-        <div className="flex gap-2 flex-wrap mb-8">
+        <div className="flex gap-2 flex-wrap mb-8 justify-center">
           <button
             onClick={() => handleCategoryChange('All')}
             className={`category-chip ${activeCategory === 'All' ? 'active' : ''}`}
@@ -103,7 +111,11 @@ export default function MenuPage() {
             🍽️ All Items ({allItems.length})
           </button>
           {availableCategories.map(cat => (
-            <button key={cat} onClick={() => handleCategoryChange(cat)} className={`category-chip ${activeCategory === cat ? 'active' : ''}`}>
+            <button
+              key={cat}
+              onClick={() => handleCategoryChange(cat)}
+              className={`category-chip ${activeCategory === cat ? 'active' : ''}`}
+            >
               {categoryIcons[cat]} {cat}
             </button>
           ))}
@@ -115,9 +127,7 @@ export default function MenuPage() {
             {activeCategory === 'All' ? `All Items` : activeCategory}
             <span className="ml-2 text-sm font-normal text-muted-foreground">({filtered.length} items)</span>
           </h2>
-          <div className="text-sm text-muted-foreground hidden md:block">
-            📍 {branch.name}
-          </div>
+          <div className="text-sm text-muted-foreground hidden md:block">📍 {branch.name}</div>
         </div>
 
         {/* Grid */}
@@ -132,7 +142,7 @@ export default function MenuPage() {
             {filtered.map(item => <MenuItemCard key={item.id} item={item} />)}
           </div>
         )}
-      </div>
+      </main>
 
       {/* ================= HOW TO ORDER ================= */}
       <section className="py-16 px-4 md:px-8 bg-muted/40 border-t border-border">
@@ -158,10 +168,9 @@ export default function MenuPage() {
           </div>
         </div>
       </section>
-      
 
-      {/* ================= PROFESSIONAL FOOTER ================= */}
-      <Footer/>
+      {/* ================= FOOTER ================= */}
+      <Footer />
     </div>
   );
 }
