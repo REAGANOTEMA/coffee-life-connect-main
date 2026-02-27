@@ -5,7 +5,7 @@ import { useApp } from '@/context/AppContext';
 import { branches, branchMenus, MenuItem } from '@/data/menuData';
 import Footer from '@/components/footer';
 import MenuItemCard from '@/components/MenuItemCard';
-import { predictTopItems } from '@/utils/AiSalesPredictions';
+import { predictTopItems } from '@/utils/aiSalesPrediction';
 
 import hero1 from '@/assets/hero-cafe.jpg';
 import hero2 from '@/assets/hero2.jpg';
@@ -24,22 +24,24 @@ export default function Index() {
   const featuredItems = branchMenus[selectedBranch]?.filter(i => i.popular).slice(0, 6) || [];
 
   // ================= AI Top Items =================
-  const [topItems, setTopItems] = useState<MenuItem[]>([]);
+const [topItems, setTopItems] = useState<MenuItem[]>([]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const items = await predictTopItems(selectedBranch);
-        setTopItems(
-          items
-            .map(([name]) => branchMenus[selectedBranch].find(i => i.name === name))
-            .filter(Boolean) as MenuItem[]
-        );
-      } catch (err) {
-        console.error('Error fetching top items:', err);
-      }
-    })();
-  }, [selectedBranch]);
+useEffect(() => {
+  const load = async () => {
+    try {
+      const results = await predictTopItems(selectedBranch);
+
+      // results = [MenuItem, qty]
+      setTopItems(results.map(([item]) => item));
+    } catch (err) {
+      console.error('Error fetching top items:', err);
+      setTopItems([]);
+    }
+  };
+
+  load();
+}, [selectedBranch]);
+
 
   // ================= HERO SLIDER =================
   const heroImages = [hero1, hero2, hero3, hero4, hero5];
