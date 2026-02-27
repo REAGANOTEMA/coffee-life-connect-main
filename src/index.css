@@ -1,8 +1,9 @@
+/* MUST BE FIRST — FIXES NETLIFY BUILD ERROR */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -56,7 +57,6 @@
     --shadow-gold: 0 4px 20px -4px hsl(43 85% 46% / 0.4);
     --shadow-card: 0 2px 12px -2px hsl(25 40% 12% / 0.12);
 
-    /* Sidebar */
     --sidebar-background: 25 55% 20%;
     --sidebar-foreground: 38 60% 92%;
     --sidebar-primary: 43 85% 46%;
